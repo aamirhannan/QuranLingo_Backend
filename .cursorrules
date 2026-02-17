@@ -1,0 +1,53 @@
+
+# Architecture Guidelines
+
+This project follows a strict layered architecture: **Routes -> Controllers -> Services -> Repositories**.
+
+## 1. Routes (Presentation Layer)
+-   **Location**: `src/routes/`
+-   **Responsibility**: Define API endpoints and map them to controller methods.
+-   **Rules**:
+    -   Must ONLY import from `controllers`.
+    -   NO business logic allowed.
+    -   NO direct database calls.
+
+## 2. Controllers (Request/Response Layer)
+-   **Location**: `src/controllers/`
+-   **Responsibility**: Handle HTTP requests (`req`), validation, and responses (`res`).
+-   **Rules**:
+    -   Must ONLY import from `services`.
+    -   Extract data (body, params, query) from `req`.
+    -   Pass data to service methods.
+    -   Handle errors (try/catch with `next(error)`).
+    -   Return standardized JSON responses.
+    -   NO direct database calls.
+
+## 3. Services (Business Logic Layer)
+-   **Location**: `src/services/`
+-   **Responsibility**: Core business logic, validation, transformations, external API calls.
+-   **Rules**:
+    -   Must ONLY import from `repositories` or strictly typed Models (interfaces).
+    -   Perform calculations, password hashing, token generation, etc.
+    -   NO direct access to `req` or `res`.
+    -   NO direct database calls (use repository methods).
+
+## 4. Repositories (Data Access Layer)
+-   **Location**: `src/repositories/`
+-   **Responsibility**: Direct interaction with the database.
+-   **Rules**:
+    -   This is the ONLY place where database models (e.g., Mongoose Models) are imported and used.
+    -   Perform `find`, `create`, `update`, `delete` operations.
+    -   Return domain objects or raw data to the service.
+
+## 5. API Documentation
+-   **Location**: `apiDoc.json`
+-   **Responsibility**: Document all API endpoints.
+-   **Rules**:
+    -   Must be updated with every new endpoint.
+    -   Must include request/response examples.
+    -   Must follow OpenAPI specification.
+
+## Summary Dependency Flow
+`Route -> Controller -> Service -> Repository -> Database Model`
+
+ANY deviation from this flow is a violation of the project architecture.

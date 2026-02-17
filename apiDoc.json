@@ -1,0 +1,58 @@
+[
+    {
+        "description": "Register New User",
+        "endpoint": "POST - http://localhost:5000/api/v1/users/register",
+        "req": {
+            "name": "John Doe",
+            "email": "john@example.com",
+            "password": "password123"
+        },
+        "res": {
+            "success": true,
+            "data": {
+                "_id": "60d0fe4f5311236168a109ca",
+                "name": "John Doe",
+                "email": "john@example.com",
+                "role": "user",
+                "createdAt": "2024-03-20T10:00:00.000Z",
+                "updatedAt": "2024-03-20T10:00:00.000Z"
+            }
+        }
+    },
+    {
+        "description": "Login User",
+        "endpoint": "POST - http://localhost:5000/api/v1/users/login",
+        "req": {
+            "email": "john@example.com",
+            "password": "password123"
+        },
+        "res": {
+            "success": true,
+            "data": {
+                "user": {
+                    "_id": "60d0fe4f5311236168a109ca",
+                    "name": "John Doe",
+                    "email": "john@example.com",
+                    "role": "user"
+                },
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            }
+        }
+    },
+    {
+        "description": "Get User Profile",
+        "endpoint": "GET - http://localhost:5000/api/v1/users/:id",
+        "req": {},
+        "res": {
+            "success": true,
+            "data": {
+                "_id": "60d0fe4f5311236168a109ca",
+                "name": "John Doe",
+                "email": "john@example.com",
+                "role": "user",
+                "createdAt": "2024-03-20T10:00:00.000Z",
+                "updatedAt": "2024-03-20T10:00:00.000Z"
+            }
+        }
+    }
+]
