@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../models/user.model';
 import * as userRepository from '../repositories/user.repository';
+import { generateUUID } from '../utils/utilFunction';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 const JWT_EXPIRES_IN = '24h';
@@ -19,11 +20,15 @@ export const signup = async (userData: Partial<IUser>) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password!, salt);
 
+  // create userID
+  const userID = generateUUID();
+
   // Create user
   const user = await userRepository.createUser({
     name,
     email,
     password: hashedPassword,
+    userID
   });
 
   // Return user without password

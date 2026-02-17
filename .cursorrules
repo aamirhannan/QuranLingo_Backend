@@ -39,6 +39,14 @@ This project follows a strict layered architecture: **Routes -> Controllers -> S
     -   Perform `find`, `create`, `update`, `delete` operations.
     -   Return domain objects or raw data to the service.
 
+## 5. API Documentation
+-   **Location**: `apiDoc.json`
+-   **Responsibility**: Document all API endpoints.
+-   **Rules**:
+    -   Must be updated with every new endpoint.
+    -   Must include request/response examples.
+    -   Must follow OpenAPI specification.
+
 ## Summary Dependency Flow
 `Route -> Controller -> Service -> Repository -> Database Model`
 
