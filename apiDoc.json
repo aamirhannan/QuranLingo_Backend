@@ -98,6 +98,7 @@
     {
         "description": "Create Word",
         "endpoint": "POST - http://localhost:5000/api/v1/words/create",
+        "auth": "Required (httpOnly cookie)",
         "req": {
             "phaseId": "phase_1",
             "chapterId": "ch_1",
@@ -120,6 +121,74 @@
                 "transliteration": "Hādhā",
                 "createdAt": "...",
                 "updatedAt": "..."
+            }
+        }
+    },
+    {
+        "description": "Logout User",
+        "endpoint": "POST - http://localhost:5000/api/v1/users/logout",
+        "auth": "Required (httpOnly cookie)",
+        "note": "Invalidates all existing tokens for the user and clears the cookie",
+        "req": {},
+        "res": {
+            "success": true,
+            "message": "Logged out successfully"
+        }
+    },
+    {
+        "description": "Record Word Read",
+        "endpoint": "POST - http://localhost:5000/api/v1/progress/read-word",
+        "auth": "Required (httpOnly cookie)",
+        "req": {
+            "wordId": "w_1"
+        },
+        "res": {
+            "success": true,
+            "message": "Word recorded successfully",
+            "data": {
+                "_id": "60d0fe4f53112...",
+                "userID": "user-uuid-123",
+                "wordId": "w_1",
+                "createdAt": "2024-03-20T10:00:00.000Z",
+                "updatedAt": "2024-03-20T10:00:00.000Z"
+            }
+        }
+    },
+    {
+        "description": "Get Word History",
+        "endpoint": "GET - http://localhost:5000/api/v1/progress/history",
+        "auth": "Required (httpOnly cookie)",
+        "req": {},
+        "res": {
+            "success": true,
+            "data": [
+                {
+                    "_id": "60d0fe4f53112...",
+                    "userID": "user-uuid-123",
+                    "wordId": "w_1",
+                    "createdAt": "2024-03-20T10:00:00.000Z",
+                    "updatedAt": "2024-03-20T10:00:00.000Z"
+                },
+                {
+                    "_id": "60d0fe4f53113...",
+                    "userID": "user-uuid-123",
+                    "wordId": "w_2",
+                    "createdAt": "2024-03-20T10:05:00.000Z",
+                    "updatedAt": "2024-03-20T10:05:00.000Z"
+                }
+            ]
+        }
+    },
+    {
+        "description": "Get Progress Summary",
+        "endpoint": "GET - http://localhost:5000/api/v1/progress/summary",
+        "auth": "Required (httpOnly cookie)",
+        "req": {},
+        "res": {
+            "success": true,
+            "data": {
+                "currentWordId": "w_2",
+                "totalWordsRead": 15
             }
         }
     }

@@ -23,3 +23,11 @@ export const incrementTokenVersion = async (userID: string): Promise<IUser | nul
     { new: true }
   );
 };
+
+export const updateCurrentWordId = async (userID: string, wordId: string): Promise<IUser | null> => {
+  return await User.findOneAndUpdate(
+    { userID },
+    { currentWordId: wordId },
+    { new: true }
+  );
+};
