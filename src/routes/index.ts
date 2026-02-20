@@ -4,11 +4,13 @@ import phaseRoutes from './phase.routes';
 import chapterRoutes from './chapter.routes';
 import wordRoutes from './word.routes';
 import progressRoutes from './progress.routes';
+import curriculumRoutes from './curriculum.routes';
 
 const router = Router();
 
 router.use('/users', userRoutes);
 router.use('/progress', progressRoutes);
+router.use('/curriculum', curriculumRoutes);
 
 // not to be exposed to public, only for admin
 router.use('/phases', phaseRoutes);
