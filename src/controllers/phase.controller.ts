@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as phaseService from '../services/phase.service';
-import { generateUUID } from 'src/utils/utilFunction';
-// import { generateUUID } from '../../utils/utilFunction';
+import { generateUUID } from '../utils/utilFunction';
 
 export const createPhase = async (req: Request, res: Response, next: NextFunction) => {
     try {

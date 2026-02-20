@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as chapterService from '../services/chapter.service';
-import { generateUUID } from 'src/utils/utilFunction';
+import { generateUUID } from '../utils/utilFunction';
 
 export const createChapter = async (req: Request, res: Response, next: NextFunction) => {
     try {
