@@ -54,5 +54,73 @@
                 "updatedAt": "2024-03-20T10:00:00.000Z"
             }
         }
+    },
+    {
+        "description": "Create Phase",
+        "endpoint": "POST - http://localhost:5000/api/v1/phases/create",
+        "req": {
+            "name": "Phase 1: Makki",
+            "description": "The first phase of revelation."
+        },
+        "res": {
+            "success": true,
+            "data": {
+                "_id": "60d0fe4f53112...",
+                "phaseId": "phase_1",
+                "name": "Phase 1: Makki",
+                "description": "The first phase of revelation.",
+                "createdAt": "...",
+                "updatedAt": "..."
+            }
+        }
+    },
+    {
+        "description": "Create Chapter",
+        "endpoint": "POST - http://localhost:5000/api/v1/chapters/create",
+        "req": {
+            "phaseId": "phase_1",
+            "name": "Chapter 1",
+            "description": "Introduction"
+        },
+        "res": {
+            "success": true,
+            "data": {
+                "_id": "60d0fe4f53112...",
+                "phaseId": "phase_1",
+                "chapterId": "ch_1",
+                "name": "Chapter 1",
+                "description": "Introduction",
+                "createdAt": "...",
+                "updatedAt": "..."
+            }
+        }
+    },
+    {
+        "description": "Create Word",
+        "endpoint": "POST - http://localhost:5000/api/v1/words/create",
+        "req": {
+            "phaseId": "phase_1",
+            "chapterId": "ch_1",
+            "arabic": "هٰذَا",
+            "transliteration": "Hādhā",
+            "translations": {
+                "en": "This",
+                "ur": "یہ",
+                "ur_en": "Yeh"
+            },
+            "gender": "male",
+            "examples": []
+        },
+        "res": {
+            "success": true,
+            "data": {
+                "_id": "60d0fe4f53112...",
+                "wordId": "w_1",
+                "arabic": "هٰذَا",
+                "transliteration": "Hādhā",
+                "createdAt": "...",
+                "updatedAt": "..."
+            }
+        }
     }
 ]
