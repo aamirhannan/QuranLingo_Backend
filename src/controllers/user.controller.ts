@@ -50,3 +50,21 @@ export const getProfile = async (req: Request, res: Response, next: NextFunction
     next(error);
   }
 };
+
+export const logout = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Bump tokenVersion to invalidate all existing tokens
+    await userService.logout(req.user!.userID);
+
+    // Clear the cookie
+    res.clearCookie('token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
+
+    res.status(200).json({ success: true, message: 'Logged out successfully' });
+  } catch (error) {
+    next(error);
+  }
+};

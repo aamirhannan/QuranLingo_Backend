@@ -80,3 +80,17 @@ export const getUserById = async (id: string) => {
 export const createUser = async (userData: any) => {
   return signup(userData);
 }
+
+/**
+ * Logout — Increments tokenVersion to invalidate all existing tokens
+ */
+export const logout = async (userID: string) => {
+  await userRepository.incrementTokenVersion(userID);
+};
+
+/**
+ * Invalidate all tokens for a user (e.g., on password change)
+ */
+export const invalidateAllTokens = async (userID: string) => {
+  await userRepository.incrementTokenVersion(userID);
+};

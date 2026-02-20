@@ -10,5 +10,6 @@ router.post('/login', userController.login);
 
 // Protected routes
 router.get('/:id', authGuard, userController.getProfile);
+router.post('/logout', authGuard, userController.logout);
 
 export default router;

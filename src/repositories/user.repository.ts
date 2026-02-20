@@ -15,3 +15,11 @@ export const findUserById = async (id: string): Promise<IUser | null> => {
 export const findUserByUserID = async (userID: string): Promise<IUser | null> => {
   return await User.findOne({ userID });
 };
+
+export const incrementTokenVersion = async (userID: string): Promise<IUser | null> => {
+  return await User.findOneAndUpdate(
+    { userID },
+    { $inc: { tokenVersion: 1 } },
+    { new: true }
+  );
+};

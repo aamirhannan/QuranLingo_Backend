@@ -14,6 +14,7 @@ export interface TokenPayload {
     role: string;
     userID: string;
     isVerified: boolean;
+    tokenVersion: number;
     createdAt: string;
     updatedAt: string;
     iat: number;
@@ -61,7 +62,8 @@ export const tokenExtractor = (req: Request, res: Response, next: NextFunction) 
  * Applied to protected routes only.
  * 1. Checks if `req.user` was populated by the tokenExtractor (valid JWT)
  * 2. Verifies the user still exists in the database (not deleted/deactivated)
- * If either check fails → aborts with 401 Unauthorized.
+ * 3. Compares tokenVersion from JWT with the DB — rejects outdated tokens
+ * If any check fails → aborts with 401 Unauthorized.
  */
 export const authGuard = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) {
@@ -73,11 +75,20 @@ export const authGuard = async (req: Request, res: Response, next: NextFunction)
     }
 
     // Verify user still exists in the database
-    const userExists = await userRepository.findUserByUserID(req.user.userID);
-    if (!userExists) {
+    const dbUser = await userRepository.findUserByUserID(req.user.userID);
+    if (!dbUser) {
         res.status(401).json({
             success: false,
             message: 'Unauthorized — User no longer exists'
+        });
+        return;
+    }
+
+    // Compare token version — reject if token was issued before logout/password change
+    if (req.user.tokenVersion !== dbUser.tokenVersion) {
+        res.status(401).json({
+            success: false,
+            message: 'Unauthorized — Token has been revoked, please login again'
         });
         return;
     }
