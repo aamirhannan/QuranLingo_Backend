@@ -191,5 +191,66 @@
                 "totalWordsRead": 15
             }
         }
+    },
+    {
+        "description": "Get Curriculum Overview",
+        "endpoint": "GET - http://localhost:5000/api/v1/curriculum",
+        "auth": "Required (httpOnly cookie)",
+        "note": "Returns all phases with chapters and word counts. No words included — use the chapter detail endpoint to get words.",
+        "req": {},
+        "res": {
+            "success": true,
+            "data": [
+                {
+                    "phaseId": "phase-uuid-1",
+                    "name": "Phase 1: Foundation",
+                    "description": "Core vocabulary and grammar",
+                    "chapters": [
+                        {
+                            "chapterId": "ch-uuid-1",
+                            "name": "Personal Pronouns",
+                            "description": "Learn Arabic pronouns",
+                            "wordCount": 12
+                        },
+                        {
+                            "chapterId": "ch-uuid-2",
+                            "name": "Demonstrative Pronouns",
+                            "description": "This, That, These, Those",
+                            "wordCount": 8
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "description": "Get Chapter Words",
+        "endpoint": "GET - http://localhost:5000/api/v1/curriculum/:phaseId/:chapterId",
+        "auth": "Required (httpOnly cookie)",
+        "note": "Returns a specific chapter with all its words for studying",
+        "req": {},
+        "res": {
+            "success": true,
+            "data": {
+                "phaseId": "phase-uuid-1",
+                "chapterId": "ch-uuid-1",
+                "name": "Personal Pronouns",
+                "description": "Learn Arabic pronouns",
+                "words": [
+                    {
+                        "wordId": "w-uuid-1",
+                        "arabic": "هٰذَا",
+                        "transliteration": "Hādhā",
+                        "translations": {
+                            "en": "This",
+                            "ur": "یہ",
+                            "ur_en": "Yeh"
+                        },
+                        "gender": "male",
+                        "examples": []
+                    }
+                ]
+            }
+        }
     }
 ]
