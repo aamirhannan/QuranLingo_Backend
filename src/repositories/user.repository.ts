@@ -11,3 +11,7 @@ export const createUser = async (userData: Partial<IUser>): Promise<IUser> => {
 export const findUserById = async (id: string): Promise<IUser | null> => {
   return await User.findById(id);
 };
+
+export const findUserByUserID = async (userID: string): Promise<IUser | null> => {
+  return await User.findOne({ userID });
+};

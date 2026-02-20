@@ -22,6 +22,7 @@
     {
         "description": "Login User",
         "endpoint": "POST - http://localhost:5000/api/v1/users/login",
+        "note": "Token is set as an httpOnly cookie named 'token' (not in response body)",
         "req": {
             "email": "john@example.com",
             "password": "password123"
@@ -34,8 +35,7 @@
                     "name": "John Doe",
                     "email": "john@example.com",
                     "role": "user"
-                },
-                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
             }
         }
     },

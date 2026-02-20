@@ -18,7 +18,16 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   try {
     const { email, password } = req.body;
     const { user, token } = await userService.login({ email, password });
-    res.status(200).json({ success: true, data: { user, token } });
+
+    // Set token as httpOnly cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    });
+
+    res.status(200).json({ success: true, data: { user } });
   } catch (error: any) {
     if (error.message === 'Invalid credentials') {
       res.status(401).json({ success: false, message: error.message });
