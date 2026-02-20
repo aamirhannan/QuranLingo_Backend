@@ -1,0 +1,155 @@
+import { LevelNode, Word } from '../../config/types';
+
+/**
+ * Chapter 6: Connectors
+ * Phase 1: Foundation
+ * 
+ * What this chapter teaches:
+ * How ideas are linked together in the Qur'an.
+ * 
+ * Examples: And, Then, So, But, Because
+ * 
+ * Purpose:
+ * Helps understand:
+ * - Flow of verses
+ * - Arguments
+ * - Stories
+ * - Reasoning
+ * 
+ * This is the "logic of Qur'an".
+ */
+
+// TODO: Replace with actual connector words from PDF List 6
+const words: Word[] = [
+  { 
+    id: 'ch6-w1',
+    arabic: 'وَ', 
+    transliteration: 'Wa', 
+    translations: {
+      en: 'And / By (oath)',
+      ur: 'اور / قسم ہے',
+      ur_en: 'Aur / Qasam hai'
+    } 
+  },
+  { 
+    id: 'ch6-w2',
+    arabic: 'فَـ', 
+    transliteration: 'Fa', 
+    translations: {
+      en: 'Then (immediately) / So',
+      ur: 'تو / پس',
+      ur_en: 'Toh / Pas'
+    } 
+  },
+  { 
+    id: 'ch6-w3',
+    arabic: 'ثُمَّ', 
+    transliteration: 'Thumma', 
+    translations: {
+      en: 'Then (after a delay)',
+      ur: 'پھر',
+      ur_en: 'Phir'
+    } 
+  },
+  { 
+    id: 'ch6-w4',
+    arabic: 'أَوْ', 
+    transliteration: 'Aw', 
+    translations: {
+      en: 'Or',
+      ur: 'یا',
+      ur_en: 'Ya'
+    } 
+  },
+  { 
+    id: 'ch6-w5',
+    arabic: 'أَمْ', 
+    transliteration: 'Am', 
+    translations: {
+      en: 'Or? (in questions)',
+      ur: 'یا (سوالیہ)',
+      ur_en: 'Ya (sawaliya)'
+    } 
+  },
+  { 
+    id: 'ch6-w6',
+    arabic: 'لٰكِنْ', 
+    transliteration: 'Lākin', 
+    translations: {
+      en: 'But',
+      ur: 'لیکن',
+      ur_en: 'Lekin'
+    } 
+  },
+  { 
+    id: 'ch6-w7',
+    arabic: 'إِذْ', 
+    transliteration: 'Idh', 
+    translations: {
+      en: 'When (past event)',
+      ur: 'جب (ماضی کا واقعہ)',
+      ur_en: 'Jab (maazi ka waqia)'
+    } 
+  },
+  { 
+    id: 'ch6-w8',
+    arabic: 'إِذَا', 
+    transliteration: 'Idhā', 
+    translations: {
+      en: 'When (future/conditional)',
+      ur: 'جب (مستقبل)',
+      ur_en: 'Jab (mustaqbil)'
+    } 
+  },
+  { 
+    id: 'ch6-w9',
+    arabic: 'لَمَّا', 
+    transliteration: 'Lammā', 
+    translations: {
+      en: 'When (past)',
+      ur: 'جب (ماضی)',
+      ur_en: 'Jab (maazi)'
+    } 
+  },
+  { 
+    id: 'ch6-w10',
+    arabic: 'لَوْ', 
+    transliteration: 'Law', 
+    translations: {
+      en: 'If (hypothetical)',
+      ur: 'اگر / کاش',
+      ur_en: 'Agar / Kaash'
+    } 
+  },
+  { 
+    id: 'ch6-w11',
+    arabic: 'إِنْ', 
+    transliteration: 'In', 
+    translations: {
+      en: 'If',
+      ur: 'اگر',
+      ur_en: 'Agar'
+    } 
+  },
+  { 
+    id: 'ch6-w12',
+    arabic: 'لَوْلَا', 
+    transliteration: 'Lawlā', 
+    translations: {
+      en: 'If not / Why not',
+      ur: 'اگر نہیں / کیوں نہیں',
+      ur_en: 'Agar nahi / Kyun nahi'
+    } 
+  }
+];
+
+export const CHAPTER_SIX: LevelNode = {
+  id: 'chapter-6',
+  section: 'Phase 1: Foundation',
+  title: 'Connectors',
+  description: 'How ideas are linked together - the logic of Qur\'an.',
+  icon: '🔗',
+  color: 'bg-orange-500',
+  locked: false,
+  words: words
+};

@@ -2,6 +2,8 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import { tokenExtractor } from './middlewares/auth.middleware';
 import { errorMiddleware } from './middlewares/error.middleware';
 import routes from './routes';
 
@@ -10,9 +12,11 @@ const app: Application = express();
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 app.use(helmet());
 app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(tokenExtractor);
 
 // Routes
 app.use('/api/v1', routes);

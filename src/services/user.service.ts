@@ -34,7 +34,7 @@ export const signup = async (userData: Partial<IUser>) => {
   // Return user without password
   const userResponse = (user as any).toObject();
   delete (userResponse as any).password;
-  
+
   return userResponse;
 };
 
@@ -53,14 +53,14 @@ export const login = async (loginData: Pick<IUser, 'email' | 'password'>) => {
     throw new Error('Invalid credentials');
   }
 
-  // Generate Token
-  const token = jwt.sign({ id: (user as any)._id, role: user.role }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN,
-  });
-
   // Return user without password
   const userResponse = (user as any).toObject();
   delete (userResponse as any).password;
+
+  // Generate Token with full user info
+  const token = jwt.sign(userResponse, JWT_SECRET, {
+    expiresIn: JWT_EXPIRES_IN,
+  });
 
   return { user: userResponse, token };
 };
@@ -70,7 +70,7 @@ export const getUserById = async (id: string) => {
   const user = await userRepository.findUserById(id);
   if (user) {
     // Avoid returning the password even in this helper method, for security
-     const userResponse = (user as any).toObject();
+    const userResponse = (user as any).toObject();
     delete (userResponse as any).password;
     return userResponse;
   }
@@ -78,5 +78,19 @@ export const getUserById = async (id: string) => {
 };
 
 export const createUser = async (userData: any) => {
-    return signup(userData);
+  return signup(userData);
 }
+
+/**
+ * Logout — Increments tokenVersion to invalidate all existing tokens
+ */
+export const logout = async (userID: string) => {
+  await userRepository.incrementTokenVersion(userID);
+};
+
+/**
+ * Invalidate all tokens for a user (e.g., on password change)
+ */
+export const invalidateAllTokens = async (userID: string) => {
+  await userRepository.incrementTokenVersion(userID);
+};

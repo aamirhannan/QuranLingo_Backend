@@ -16,8 +16,8 @@ This project follows a strict layered architecture: **Routes -> Controllers -> S
 -   **Responsibility**: Handle HTTP requests (`req`), validation, and responses (`res`).
 -   **Rules**:
     -   Must ONLY import from `services`.
-    -   Extract data (body, params, query) from `req`.
-    -   Pass data to service methods.
+    -   **Extract & Validate data**: Explicitly extract and validate required fields from `req.body`, `req.params`, etc. DO NOT pass `req.body` directly to services without validation.
+    -   Pass validated data to service methods.
     -   Handle errors (try/catch with `next(error)`).
     -   Return standardized JSON responses.
     -   NO direct database calls.
